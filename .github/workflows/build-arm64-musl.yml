@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ghcr.io/alexlarsson/ubuntu-musl-cross:aarch64
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -19,17 +18,18 @@ jobs:
           sudo apt update
           sudo apt install -y cmake build-essential git wget
 
-      - name: Install aarch64 musl toolchain
+      - name: Download musl ARM64 toolchain
         run: |
-          wget https://musl.cc/aarch64-linux-musl-cross.tgz
+          wget https://github.com/omarDans/moneroocean-xmrig/releases/download/arm64-musl-compiler/aarch64-linux-musl-cross.tgz
           tar xf aarch64-linux-musl-cross.tgz
-          export PATH=$PWD/aarch64-linux-musl-cross/bin:$PATH
           echo "PATH=$PWD/aarch64-linux-musl-cross/bin:$PATH" >> $GITHUB_ENV
+          
       - name: Build dependencies
         run: |
           cd scripts/deps
           chmod +x build_deps.sh
           CC=aarch64-linux-musl-gcc CXX=aarch64-linux-musl-g++ ./build_deps.sh
+          
       - name: Build XMRig for ARM64 MUSL
         run: |
           mkdir -p build && cd build
