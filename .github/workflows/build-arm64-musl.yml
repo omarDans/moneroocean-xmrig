@@ -26,7 +26,7 @@ jobs:
           
       - name: Build dependencies
         run: |
-          cd scripts/deps
+          cd scripts
           chmod +x build_deps.sh
           CC=aarch64-linux-musl-gcc CXX=aarch64-linux-musl-g++ ./build_deps.sh
           
