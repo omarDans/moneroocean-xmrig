@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: ghcr.io/alexlarsson/ubuntu-musl-cross:aarch64
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
