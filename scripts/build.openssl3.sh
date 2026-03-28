@@ -12,7 +12,7 @@ wget https://github.com/openssl/openssl/releases/download/openssl-${OPENSSL_VERS
 tar -xzf openssl-${OPENSSL_VERSION}.tar.gz
 
 cd openssl-${OPENSSL_VERSION}
-./config -no-shared -no-asm -no-zlib -no-comp -no-dgram -no-filenames -no-cms
+./Configure linux-aarch64 -no-shared -no-asm -no-zlib -no-comp -no-dgram -no-filenames -no-cms
 make -j$(nproc || sysctl -n hw.ncpu || sysctl -n hw.logicalcpu)
 cp -fr include ../../deps
 cp libcrypto.a ../../deps/lib
